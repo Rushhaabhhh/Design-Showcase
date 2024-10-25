@@ -1,37 +1,51 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronRight, Camera, Car, ShoppingBag, Watch, ArrowRight, Github, Linkedin } from 'lucide-react';
+import { Menu, X, ChevronRight, Camera, Car, ShoppingBag, Watch, ArrowRight, Github, Linkedin, HandMetal } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const slides = [
+  
   { 
     title: 'Movie Posters', 
     content: 'Explore stunning movie poster designs that capture the essence of storytelling.',
     icon: <Camera className="w-8 h-8 mb-4" />,
-    color: 'from-purple-500 to-pink-500'
+    color: 'from-purple-500 to-pink-500',
+    path: '/movie-poster'
   },
-  { 
-    title: 'Car Designs', 
-    content: 'Discover innovative automotive designs that push the boundaries of engineering.',
-    icon: <Car className="w-8 h-8 mb-4" />,
-    color: 'from-blue-500 to-cyan-500'
-  },
-  { 
-    title: 'Fashion Gallery', 
-    content: 'Experience the latest trends in fashion with our curated collection.',
-    icon: <ShoppingBag className="w-8 h-8 mb-4" />,
-    color: 'from-green-500 to-emerald-500'
-  },
-  { 
-    title: 'Luxury Timepieces', 
-    content: 'Admire the craftsmanship of premium watch designs.',
-    icon: <Watch className="w-8 h-8 mb-4" />,
-    color: 'from-yellow-500 to-orange-500'
+  // { 
+  //   title: 'Car Designs', 
+  //   content: 'Discover innovative automotive designs that push the boundaries of engineering.',
+  //   icon: <Car className="w-8 h-8 mb-4" />,
+  //   color: 'from-blue-500 to-cyan-500',
+  //   path: '/car-designs'
+  // },
+  // { 
+  //   title: 'Fashion Gallery', 
+  //   content: 'Experience the latest trends in fashion with our curated collection.',
+  //   icon: <ShoppingBag className="w-8 h-8 mb-4" />,
+  //   color: 'from-green-500 to-emerald-500',
+  //   path: '/fashion'
+  // },
+  // { 
+  //   title: 'Luxury Timepieces', 
+  //   content: 'Admire the craftsmanship of premium watch designs.',
+  //   icon: <Watch className="w-8 h-8 mb-4" />,
+  //   color: 'from-yellow-500 to-orange-500',
+  //   path: '/timepieces'
+  // }
+  {
+    title: 'Spidey Slider',
+    content: 'Discover our Spidey Slider, a captivating slider that captures the essence of Spider-Man.',
+    icon: <HandMetal className="w-8 h-8 mb-4" />,
+    color: 'from-purple-500 to-pink-500',
+    path: '/spidey-slider'
   }
 ];
 
 const LandingPage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -62,8 +76,19 @@ const LandingPage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          Design<span className="text-blue-500">Forge</span>
+          Design<span className="text-blue-500">Showcase</span>
         </motion.h1>
+
+        <motion.h1 
+          className="text-xl"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div> This site is a work in progress</div>
+          <div> Explore the existing projects below</div>
+        </motion.h1>
+        
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
@@ -162,8 +187,8 @@ const LandingPage = () => {
         </motion.div>
       </section>
 
-      {/* Featured Designs Section */}
-      <section id="gallery" className="relative py-20 px-6 md:px-10">
+      {/* Projects Section */}
+      <section id="gallery" className="relative py-20 px-6 md:px-10 bg-[#222] min-h-screen">
         <motion.h3 
           className="text-3xl font-bold text-center mb-12"
           initial={{ opacity: 0 }}
@@ -173,26 +198,31 @@ const LandingPage = () => {
           Featured Projects
         </motion.h3>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
           {slides.map((slide, index) => (
             <motion.div
               key={index}
-              className="group relative bg-gray-800 p-6 rounded-xl overflow-hidden hover:shadow-2xl transition-all duration-300"
+              className="group relative overflow-hidden rounded-xl bg-gray-800 aspect-[4/5]"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
               whileHover={{ y: -5 }}
             >
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-10 transition-opacity"
-                initial={{ opacity: 0 }}
-                whileHover={{ opacity: 0.1 }}
-              />
-              {slide.icon}
-              <h4 className="text-xl font-bold mb-3">{slide.title}</h4>
-              <p className="text-gray-400">{slide.content}</p>
-              <ChevronRight className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute inset-0 bg-black/40 transition-opacity group-hover:opacity-0" />
+              <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
+                {slide.icon}
+                <h4 className="text-2xl font-bold mb-3">{slide.title}</h4>
+                <p className="text-gray-300 mb-6">{slide.content}</p>
+                <motion.button
+                  onClick={() => navigate(slide.path)}
+                  className="px-6 py-3 bg-blue-500 rounded-lg font-semibold hover:bg-blue-600 transition-colors"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  View Project
+                </motion.button>
+              </div>
             </motion.div>
           ))}
         </div>
