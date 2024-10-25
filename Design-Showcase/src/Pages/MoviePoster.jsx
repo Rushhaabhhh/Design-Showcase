@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { gsap } from 'gsap';
-import { Star, Play, Calendar, Clock, Share2, BookOpen, Award, Volume2, VolumeX, ThumbsUp, Twitter, Facebook, Instagram } from 'lucide-react';
+import { Star, Play, Calendar, Clock, BookOpen, Award, Volume2, VolumeX, ThumbsUp, Twitter, Facebook, Instagram } from 'lucide-react';
 
 import joker1 from '../assets/joker-1.jpg';
 import joker2 from '../assets/joker-2.jpg';
@@ -23,7 +23,7 @@ const MoviePoster = () => {
         try {
           await audio.play();
         } catch (error) {
-          console.log("Autoplay prevented. Please interact with the page first.");
+          console.log(error);
         }
       };
       playAudio();
