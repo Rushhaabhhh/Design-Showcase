@@ -130,9 +130,9 @@ const SpideySlider = () => {
             animate="center"
             exit="exit"
             transition={{
-              x: { type: "spring", stiffness: 100, damping: 30, duration: 1.5 },
-              opacity: { duration: 1 },
-              scale: { duration: 1.5 }
+              x: { type: "spring", stiffness: 180, damping: 25, duration: 0.4 },
+              opacity: { duration: 1},
+              scale: { duration: 0.6 }
             }}
             className="absolute inset-0 flex items-center justify-center"
           >
@@ -140,7 +140,7 @@ const SpideySlider = () => {
               src={slides[currentIndex].image} 
               alt="Spider-Man" 
               className={`absolute h-4/5 right-1/4 object-contain ${slides[currentIndex].scale}`}
-              initial={{ y: 100, opacity: 0 }}
+              initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 1.5, delay: 0.5 }}
             />
